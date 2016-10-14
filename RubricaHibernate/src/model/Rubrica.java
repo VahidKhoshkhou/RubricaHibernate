@@ -64,7 +64,10 @@ public Rubrica() {
 		this.voci = voci;
 	}
 	
-	
+	public void aggiungiVoce(Voce v){
+		
+		this.voci.add(v);
+	}
 	
 	
 

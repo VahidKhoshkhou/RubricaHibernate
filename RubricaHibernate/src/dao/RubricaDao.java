@@ -126,5 +126,45 @@ Session session=HibernateUtil.openSession();
 	}
 	
 	
+	// 1- Update 
+	
+		public boolean aggiornaRubrica(Rubrica r){
+			boolean res=false;
+			
+			
+			
+			
+			
+	Session session=HibernateUtil.openSession();
+			
+			Transaction tx=null;
+			
+			try{
+			
+			tx=session.getTransaction();
+			
+			         tx.begin();
+
+			     session.update(r); 
+			         
+			         
+			     tx.commit(); 
+			     res=true;
+			}catch(Exception ex){
+				
+				tx.rollback();
+				
+				
+			}finally{
+				session.close();
+			}
+			
+		
+			
+			return res;
+			
+		}
+	
+	
 
 }
