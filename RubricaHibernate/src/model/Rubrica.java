@@ -23,7 +23,7 @@ public class Rubrica {
 	
 	private String nome;
 	
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="persone",cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="rubrica",cascade=CascadeType.ALL)
     @NotFound(action=NotFoundAction.IGNORE)
 	private Set<Voce>  voci =new HashSet<Voce>();
 	
