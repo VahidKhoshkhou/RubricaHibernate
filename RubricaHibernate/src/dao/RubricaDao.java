@@ -1,7 +1,10 @@
 package dao;
 
+
+
 import hibernateUtil.HibernateUtil;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -49,8 +52,79 @@ Session session=HibernateUtil.openSession();
 		
 	}
 	
-//     public boolean creaRubrica(String  nome,){
-//		
-//	}
+   
+	
+	// 2- Read ( con Id)
+	
+	public Rubrica leggiRubricaConId(long r_id){
+		
+		Rubrica r=null;
+       Session session=HibernateUtil.openSession();
+		
+		Transaction tx=null;
+		
+		try{
+		
+		tx=session.getTransaction();
+		
+		         tx.begin();
+
+	 
+		        r=session.get(Rubrica.class, r_id); 
+		         
+		     tx.commit(); 
+		 
+		}catch(Exception ex){
+			
+			tx.rollback();
+			
+			
+		}finally{
+			session.close();
+		}
+		
+	
+		
+		return r;
+		
+	}
+	
+	
+	// 2- Read ( con nome )
+
+	public Rubrica leggiRubricaConNome(String nome) {
+       Rubrica r = null;
+
+		Session session = HibernateUtil.openSession();
+       Transaction tx = null;
+
+		try {
+
+			tx = session.getTransaction();
+
+			tx.begin();
+
+			Query query = session
+					.createQuery("from Rubrica where nome=:nomeInserito ");
+
+			query.setString("nomeInserito", nome);
+
+			r = (Rubrica) query.uniqueResult();
+
+			tx.commit();
+
+		} catch (Exception ex) {
+
+			tx.rollback();
+
+		} finally {
+			session.close();
+		}
+
+		return r;
+
+	}
+	
+	
 
 }
